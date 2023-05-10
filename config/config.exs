@@ -10,6 +10,11 @@ import Config
 config :event,
   ecto_repos: [Event.Repo]
 
+config :cloudex,
+  api_key: "523918618816438",
+  secret: "lWUHlB1i7zpjTpZFxuzljdWqSzc",
+  cloud_name: "dtzomxa7y"
+
 # Configures the endpoint
 config :event, EventWeb.Endpoint,
   url: [host: "localhost"],

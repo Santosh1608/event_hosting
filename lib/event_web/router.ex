@@ -5,8 +5,20 @@ defmodule EventWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :is_authorized do
+    plug EventWeb.Plugs.SetUser
+  end
+
   scope "/api", EventWeb do
     pipe_through :api
+    match(:*, "/admin/*path", AdminRouter, :any)
+    post "/login", AuthController, :login
+    post "/register", AuthController, :register
+  end
+
+  scope "/api", EventWeb do
+    pipe_through [:api,:is_authorized]
+    get "/me", AuthController, :me
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
