@@ -17,9 +17,15 @@ defmodule EventWeb.Router do
   end
 
   scope "/api", EventWeb do
-    pipe_through [:api,:is_authenticated]
+    pipe_through [:api, :is_authenticated]
     match(:*, "/admin/*path", AdminRouter, :is_admin)
     get "/me", AuthController, :me
+  end
+
+  scope "/api/event", EventWeb do
+    pipe_through [:api, :is_authenticated]
+    post "/:id/book", BookingController, :book_event
+    get "/bookings", BookingController, :get_bookings
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development

@@ -3,9 +3,11 @@ defmodule Event.Booking.Booking do
   alias Event.Auth.User
   alias Event.Event.Event
 
+  @derive {Jason.Encoder, only: [:event, :id]}
+
   schema "bookings" do
-    belongs_to :users, User, foreign_key: :user_id
-    belongs_to :events, Event, foreign_key: :event_id
+    belongs_to :user, User, foreign_key: :user_id
+    belongs_to :event, Event, foreign_key: :event_id
 
     timestamps()
   end

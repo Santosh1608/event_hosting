@@ -4,4 +4,8 @@ defmodule Event.Events do
   def create_event(admin, event \\ %{}) do
     admin |> Ecto.build_assoc(:event) |> Event.Event.Event.changeset(event) |> Repo.insert()
   end
+
+  def get_event(event_id) do
+    Repo.get(Event.Event.Event, event_id)
+  end
 end

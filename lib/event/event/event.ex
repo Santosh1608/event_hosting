@@ -5,13 +5,14 @@ defmodule Event.Event.Event do
 
   use Ecto.Schema
 
-  @derive {Jason.Encoder, only: [:description, :type, :date, :duration]}
+  @derive {Jason.Encoder, only: [:description, :type, :date, :duration, :price]}
 
   schema "events" do
     field :description, :string
     field :type, :string
     field :date, :date
     field :duration, :integer
+    field :price, :integer
     belongs_to :user, User, foreign_key: :hosted_by
     many_to_many(:users, User, join_through: Booking, on_replace: :delete)
     timestamps()
@@ -19,8 +20,8 @@ defmodule Event.Event.Event do
 
   def changeset(event, attrs) do
     event
-    |> cast(attrs, [:description, :type, :date, :duration, :hosted_by])
-    |> validate_required([:description, :type, :date, :duration, :hosted_by])
+    |> cast(attrs, [:description, :type, :date, :duration, :hosted_by, :price])
+    |> validate_required([:description, :type, :date, :duration, :hosted_by, :price])
     |> foreign_key_constraint(:hosted_by)
   end
 end
