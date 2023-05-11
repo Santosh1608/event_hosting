@@ -12,8 +12,10 @@ defmodule Event.Auth.User do
     field :email, :string
     field :avatar, :string
     field :password, :string
+    has_one :event, Event.Event.Event, foreign_key: :hosted_by
 
     many_to_many(:roles, Role, join_through: UserRole, on_replace: :delete)
+    many_to_many(:events, Event.Event.Event, join_through: Event.Booking.Booking, on_replace: :delete)
 
     timestamps()
   end

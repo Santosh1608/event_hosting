@@ -3,21 +3,22 @@ defmodule EventWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug EventWeb.Plugs.SetUser
   end
 
-  pipeline :is_authorized do
-    plug EventWeb.Plugs.SetUser
+  pipeline :is_authenticated do
+    plug EventWeb.Plugs.IsAuthenticated
   end
 
   scope "/api", EventWeb do
     pipe_through :api
-    match(:*, "/admin/*path", AdminRouter, :any)
     post "/login", AuthController, :login
     post "/register", AuthController, :register
   end
 
   scope "/api", EventWeb do
-    pipe_through [:api,:is_authorized]
+    pipe_through [:api,:is_authenticated]
+    match(:*, "/admin/*path", AdminRouter, :is_admin)
     get "/me", AuthController, :me
   end
 

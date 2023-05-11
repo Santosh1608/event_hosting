@@ -4,6 +4,8 @@ defmodule Event.Auth.Role do
   alias Event.Auth.User
   alias Event.Auth.UserRole
 
+  @derive {Jason.Encoder, only: [:name]}
+
   schema "roles" do
     field :name, :string
     many_to_many(:users, User, join_through: UserRole, on_replace: :delete)

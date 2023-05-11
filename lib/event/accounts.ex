@@ -1,7 +1,7 @@
 defmodule Event.Accounts do
   alias Event.Repo
   alias Event.Auth.User
-
+  @admin "Admin"
   def register(params) do
     User.changeset(%User{}, params)
     |> Repo.insert()
@@ -25,5 +25,12 @@ defmodule Event.Accounts do
     else
       get_user_by_username(username)
     end
+  end
+
+  def is_admin?(user) do
+    user = user
+    |> Repo.preload(:roles)
+
+    !!Enum.find(user.roles,fn role -> role.name === @admin end)
   end
 end
