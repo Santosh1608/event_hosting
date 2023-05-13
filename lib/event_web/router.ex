@@ -23,8 +23,14 @@ defmodule EventWeb.Router do
   end
 
   scope "/api/event", EventWeb do
+    pipe_through :api
+    get "/list", EventController, :all_events
+  end
+
+  scope "/api/event", EventWeb do
     pipe_through [:api, :is_authenticated]
     post "/:id/book", BookingController, :book_event
+    delete "/booking/:id", BookingController, :cancel_booking
     get "/bookings", BookingController, :get_bookings
   end
 

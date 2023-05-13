@@ -14,10 +14,18 @@ defmodule Event.Bookings do
     query =
       from booking in Event.Booking.Booking,
         join: event in assoc(booking, :event),
-        join: user in assoc(booking, :user),
-        where: user.id == ^user_id,
+        where: booking.user_id == ^user_id,
         preload: [event: event]
 
     Repo.all(query)
+  end
+
+  def get_booking(booking_id) do
+    Repo.get(Event.Booking.Booking, booking_id)
+  end
+
+  def cancel_booking(booking) do
+    Event.Booking.Booking.changeset(booking, %{status: "CANCELLED"})
+    |> Repo.update()
   end
 end

@@ -12,4 +12,9 @@ defmodule EventWeb.EventController do
         error
     end
   end
+
+  def all_events(conn, _params) do
+    events = Event.Events.show()
+    render(conn, :show, %{result: events})
+  end
 end

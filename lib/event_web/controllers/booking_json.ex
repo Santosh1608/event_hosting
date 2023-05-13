@@ -6,4 +6,11 @@ defmodule EventWeb.BookingJSON do
   def bookings(%{result: result}) do
     result
   end
+
+  def cancel_booking(%{result: booking}) do
+    %{
+      id: booking.id,
+      status: booking.status
+    }
+  end
 end

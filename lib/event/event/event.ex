@@ -5,7 +5,7 @@ defmodule Event.Event.Event do
 
   use Ecto.Schema
 
-  @derive {Jason.Encoder, only: [:description, :type, :date, :duration, :price]}
+  @derive {Jason.Encoder, only: [:description, :type, :date, :duration, :price, :id]}
 
   schema "events" do
     field :description, :string

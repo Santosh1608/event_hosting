@@ -8,4 +8,8 @@ defmodule Event.Events do
   def get_event(event_id) do
     Repo.get(Event.Event.Event, event_id)
   end
+
+  def show() do
+    Repo.all(Event.Event.Event)
+  end
 end
