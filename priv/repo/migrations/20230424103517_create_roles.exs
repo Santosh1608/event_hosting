@@ -9,9 +9,5 @@ defmodule Event.Repo.Migrations.CreateRoles do
     end
 
     create unique_index(:roles, [:name])
-
-    current_datetime = NaiveDateTime.utc_now()
-
-    execute "INSERT INTO roles(name, inserted_at, updated_at) VALUES('Admin','#{current_datetime}', '#{current_datetime}')"
   end
 end

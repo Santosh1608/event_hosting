@@ -5,7 +5,7 @@ defmodule Event.Auth.User do
   alias Event.Auth.Role
   alias Event.Auth.UserRole
 
-  @derive {Jason.Encoder, only: [:username,:email,:avatar]}
+  @derive {Jason.Encoder, only: [:username, :email, :avatar]}
 
   schema "users" do
     field :username, :string
@@ -15,12 +15,16 @@ defmodule Event.Auth.User do
     has_one :event, Event.Event.Event, foreign_key: :hosted_by
 
     many_to_many(:roles, Role, join_through: UserRole, on_replace: :delete)
-    many_to_many(:events, Event.Event.Event, join_through: Event.Booking.Booking, on_replace: :delete)
+
+    many_to_many(:events, Event.Event.Event,
+      join_through: Event.Booking.Booking,
+      on_replace: :delete
+    )
 
     timestamps()
   end
 
-  def changeset(user, attrs) do
+  def changeset(user, attrs \\ %{}) do
     user
     |> cast(attrs, [:username, :email, :password, :avatar])
     |> validate_required([:username, :email, :password])

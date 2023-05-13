@@ -13,7 +13,7 @@ defmodule Event.Auth.Role do
     timestamps()
   end
 
-  def changeset(role, attrs) do
+  def changeset(role, attrs \\ %{}) do
     role
     |> cast(attrs, [:name])
     |> validate_required([:name])

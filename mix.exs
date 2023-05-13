@@ -46,6 +46,7 @@ defmodule Event.MixProject do
       {:pbkdf2_elixir, "~> 1.4.0"},
       {:joken, "~> 2.4.1"},
       {:cloudex, "~> 1.4.1"},
+      {:stripity_stripe, "~> 2.17.3"}
     ]
   end
 

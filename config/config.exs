@@ -10,11 +10,6 @@ import Config
 config :event,
   ecto_repos: [Event.Repo]
 
-config :cloudex,
-  api_key: System.get_env("CLOUDEX_API_KEY", "523918618816438"),
-  secret: System.get_env("CLOUDEX_SECRET", "lWUHlB1i7zpjTpZFxuzljdWqSzc"),
-  cloud_name: System.get_env("CLOUDEX_CLOUD_NAME", "dtzomxa7y")
-
 # Configures the endpoint
 config :event, EventWeb.Endpoint,
   url: [host: "localhost"],

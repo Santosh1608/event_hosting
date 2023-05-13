@@ -16,6 +16,18 @@ import Config
 #
 # Alternatively, you can use `mix phx.gen.release` to generate a `bin/server`
 # script that automatically sets the env var above.
+
+# JWT signer
+config :event, :auth_secret, System.get_env("AUTH_SECRET", "secret")
+
+# CLOUDINARY
+config :cloudex,
+  api_key: System.get_env("CLOUDEX_API_KEY", "523918618816438"),
+  secret: System.get_env("CLOUDEX_SECRET", "lWUHlB1i7zpjTpZFxuzljdWqSzc"),
+  cloud_name: System.get_env("CLOUDEX_CLOUD_NAME", "dtzomxa7y")
+
+config :stripity_stripe, api_key: System.get_env("STRIPE_API_KEY")
+
 if System.get_env("PHX_SERVER") do
   config :event, EventWeb.Endpoint, server: true
 end
