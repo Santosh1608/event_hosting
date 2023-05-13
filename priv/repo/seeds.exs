@@ -13,15 +13,21 @@
 # CREATE ADMIN ROLE
 
 admin_role =
-  %Event.Auth.Role{name: "Admin"} |> Event.Auth.Role.changeset() |> Event.Repo.insert!()
+  %Event.Auth.Role{} |> Event.Auth.Role.changeset(%{name: "Admin"}) |> Event.Repo.insert!()
 
 # CREATE ADMIN
+
+username = Keyword.get(Application.get_env(:event, :admin), :username)
+email = Keyword.get(Application.get_env(:event, :admin), :email)
+password = Keyword.get(Application.get_env(:event, :admin), :password)
+
 admin =
   admin_role
   |> Event.Repo.preload(:users)
   |> Ecto.Changeset.change()
   |> Ecto.Changeset.put_assoc(:users, [
-    %{username: "admin", email: "admin@gmail.com", password: "San1234$"}
+    %Event.Auth.User{}
+    |> Event.Auth.User.changeset(%{username: username, email: email, password: password})
   ])
   |> Event.Repo.update!()
 

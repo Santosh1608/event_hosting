@@ -28,6 +28,13 @@ config :cloudex,
 
 config :stripity_stripe, api_key: System.get_env("STRIPE_API_KEY")
 
+# ADMIN USER DETAILS
+
+config :event, :admin,
+  username: System.get_env("ADMIN_USERNAME", "super"),
+  email: System.get_env("ADMIN_EMAIL", "super@gmail.com"),
+  password: System.get_env("ADMIN_PASSWORD", "super")
+
 if System.get_env("PHX_SERVER") do
   config :event, EventWeb.Endpoint, server: true
 end

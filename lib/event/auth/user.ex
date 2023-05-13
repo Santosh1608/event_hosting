@@ -4,7 +4,7 @@ defmodule Event.Auth.User do
   import Ecto.Changeset
   alias Event.Auth.Role
   alias Event.Auth.UserRole
-
+  require Logger
   @derive {Jason.Encoder, only: [:username, :email, :avatar]}
 
   schema "users" do
@@ -38,6 +38,8 @@ defmodule Event.Auth.User do
   end
 
   defp hash_password(changeset) do
+    Logger.info("Hashing password...")
+
     case changeset do
       %Ecto.Changeset{valid?: true, changes: %{password: password}} ->
         put_change(changeset, :password, Pbkdf2.hash_pwd_salt(password))

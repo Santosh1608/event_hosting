@@ -4,7 +4,7 @@ defmodule Event.Booking.Booking do
   alias Event.Event.Event
   import Ecto.Changeset
 
-  @derive {Jason.Encoder, only: [:event, :id, :inserted_at]}
+  @derive {Jason.Encoder, only: [:event, :id, :inserted_at, :status]}
 
   schema "bookings" do
     belongs_to :user, User, foreign_key: :user_id
