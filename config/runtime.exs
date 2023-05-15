@@ -26,8 +26,6 @@ config :cloudex,
   secret: System.get_env("CLOUDEX_SECRET", "lWUHlB1i7zpjTpZFxuzljdWqSzc"),
   cloud_name: System.get_env("CLOUDEX_CLOUD_NAME", "dtzomxa7y")
 
-config :stripity_stripe, api_key: System.get_env("STRIPE_API_KEY")
-
 # ADMIN USER DETAILS
 
 config :event, :admin,
